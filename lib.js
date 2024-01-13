@@ -1,16 +1,18 @@
-module.exports = (decode, encode) => {
+export default (decode, encode) => {
   const convertImage = async ({ image, format, quality }) => {
     return await encode[format]({
       width: image.width,
       height: image.height,
       data: image.data,
-      quality
+      quality,
     });
   };
 
   const convert = async ({ buffer, format, quality, all }) => {
     if (!encode[format]) {
-      throw new Error(`output format needs to be one of [${Object.keys(encode)}]`);
+      throw new Error(
+        `output format needs to be one of [${Object.keys(encode)}]`
+      );
     }
 
     if (!all) {
@@ -20,19 +22,22 @@ module.exports = (decode, encode) => {
 
     const images = await decode.all({ buffer });
 
-    return images.map(image => {
+    return images.map((image) => {
       return {
-        convert: async () => await convertImage({
-          image: await image.decode(),
-          format,
-          quality
-        })
+        convert: async () =>
+          await convertImage({
+            image: await image.decode(),
+            format,
+            quality,
+          }),
       };
     });
   };
 
   return {
-    one: async ({ buffer, format, quality = 0.92 }) => await convert({ buffer, format, quality, all: false }),
-    all: async ({ buffer, format, quality = 0.92 }) => await convert({ buffer, format, quality, all: true })
+    one: async ({ buffer, format, quality = 0.92 }) =>
+      await convert({ buffer, format, quality, all: false }),
+    all: async ({ buffer, format, quality = 0.92 }) =>
+      await convert({ buffer, format, quality, all: true }),
   };
 };
