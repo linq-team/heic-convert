@@ -37,9 +37,11 @@
     "mocha": "^7.0.0",
     "node-fetch": "^2.6.0",
     "pixelmatch": "^5.2.1",
-    "rootrequire": "^1.0.0"
+    "rootrequire": "^1.0.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@types/heic-decode": "^1.1.2",
     "heic-decode": "^2.0.0",
     "jpeg-js": "^0.4.4",
     "pngjs": "^6.0.0"

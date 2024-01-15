@@ -1,8 +1,10 @@
 // const decode = require('heic-decode');
-import decode from 'heic-decode';
+import decode from "heic-decode";
 // const formats = require('./formats-browser.js');
-import formats from './formats-browser.js';
+import formats from "./formats-browser.js";
 // const { one, all } = require('./lib.js')(decode, formats);
-import lib from './lib.js';
+import lib from "./lib.js";
 
-export default lib.one
+const { one } = lib(decode, formats);
+
+export default one;
